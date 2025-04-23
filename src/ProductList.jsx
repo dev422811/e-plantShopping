@@ -1,33 +1,16 @@
-// ProductList.jsx
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from './CartSlice';
+import './Product.css';
 
-const ProductList = ({ products }) => {
-  const dispatch = useDispatch();
-  const cart = useSelector(state => state.cart.items);
-
-  const handleAddToCart = (product) => {
-    dispatch(addItem(product));
-  };
-
-  const getTotalQuantity = () => {
-    return cart.reduce((total, item) => total + item.quantity, 0);
-  };
-
+function Product({ name, description, image, price }) {
   return (
-    <div className="product-list">
-      <h3>Total Items in Cart: {getTotalQuantity()}</h3>
-      {products.map(product => (
-        <div key={product.name} className="product">
-          <img src={product.image} alt={product.name} />
-          <h4>{product.name}</h4>
-          <p>{product.cost}</p>
-          <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
-        </div>
-      ))}
+    <div className="product-card">
+      <img src={image} alt={name} className="product-image" />
+      <h2 className="psroduct-name">{name}</h2>
+      <p className="product-description">{description}</p>
+      <p className="product-price">₹{price}</p>
+      <button className="buy-button">Buy Now</button>
     </div>
   );
-};
+}
 
-export default ProductList;
+export default Product;
